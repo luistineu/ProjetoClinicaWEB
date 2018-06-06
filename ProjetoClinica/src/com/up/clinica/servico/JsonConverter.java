@@ -22,4 +22,10 @@ public class JsonConverter {
 		 
 		 return jsonObject.toString();
 	}
+	
+	public String convertToJson(Animal animal) {
+		 JsonObject jsonObject = new JsonObject();
+		 jsonObject.add("animal", gson.toJsonTree(animal));
+		 return jsonObject.toString();
+	}
 }
