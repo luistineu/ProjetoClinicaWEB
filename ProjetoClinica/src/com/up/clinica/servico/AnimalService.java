@@ -40,8 +40,8 @@ public class AnimalService extends HttpServlet {
 				animais.add(a1);
 				animais.add(a2);
 				
-				JsonConverter converter = new JsonConverter();
-				String output = converter.convertToJson(animais);
+				AnimalJsonConverter converter = new AnimalJsonConverter();
+				String output = converter.convertToJson(animais, "animais");
 				
 				out.print(output);
 		} catch (Exception e) {

@@ -7,7 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.up.clinica.model.Animal;
 
-public class JsonConverter {
+public abstract class JsonConverter<T> implements IGenericConverter<T> {
 
 	private final Gson gson;
 
@@ -15,17 +15,19 @@ public class JsonConverter {
  		gson = new GsonBuilder().create();
  	}
  	
-	public String convertToJson(List<Animal> animais) {
-		 JsonArray jarray = gson.toJsonTree(animais).getAsJsonArray();
+	public String  convertToJson(List<T> objetos, String tipo) {
+		 JsonArray jarray = gson.toJsonTree(objetos).getAsJsonArray();
 		 JsonObject jsonObject = new JsonObject();
-		 jsonObject.add("animais", jarray);
+		 jsonObject.add(tipo, jarray);
 		 
 		 return jsonObject.toString();
 	}
 	
-	public String convertToJson(Animal animal) {
+	public String convertToJson(T objeto, String tipo) {
 		 JsonObject jsonObject = new JsonObject();
-		 jsonObject.add("animal", gson.toJsonTree(animal));
+		 jsonObject.add(tipo, gson.toJsonTree(objeto));
 		 return jsonObject.toString();
 	}
+	
+	
 }
